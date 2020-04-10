@@ -822,17 +822,6 @@ function togglePictureInPicture() {
 //Picture in picture
 
 function startUp() {
-  // Redirect mobile browsers
-  if (
-    /Android|webOS|iPhone|iPad|iPod|BlackBerry|IEMobile|Opera Mini/i.test(
-      navigator.userAgent
-    )
-  ) {
-    alert(
-      "Zipcall is not currently supported on mobile. Please try again on desktop."
-    );
-    window.location.href = "/notsupported";
-  }
   // Redirect unsupported browsers
   if (!isWebRTCSupported || browserName === "MSIE") {
     alert(
