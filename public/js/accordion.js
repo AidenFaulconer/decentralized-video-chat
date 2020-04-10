@@ -1,28 +1,26 @@
-(function () {
-  "use strict";
-  const accordionEl = document.getElementsByClassName("accordion-header");
+;(() => {
+  const accordionEl = document.getElementsByClassName('accordion-header')
 
-  function openAccordion(parent, panel) {
-    parent.classList.add("is-active");
-    panel.style.maxHeight = panel.scrollHeight + "px";
+  function openAccordion({ classList }, { style, scrollHeight }) {
+    classList.add('is-active')
+    style.maxHeight = `${scrollHeight}px`
   }
 
-  function closeAccordion(parent, panel) {
-    parent.classList.remove("is-active");
-    panel.style.maxHeight = null;
+  function closeAccordion({ classList }, { style }) {
+    classList.remove('is-active')
+    style.maxHeight = null
   }
 
   if (accordionEl.length > 0) {
-    for (let i = 0; i < accordionEl.length; i++) {
-      const el = accordionEl[i];
-      const parent = el.parentNode;
-      const panel = el.nextElementSibling;
-      parent.classList.contains("is-active") && openAccordion(parent, panel);
-      el.addEventListener("click", function () {
-        parent.classList.contains("is-active")
+    accordionEl.forEach((el) => {
+      const parent = el.parentNode
+      const panel = el.nextElementSibling
+      parent.classList.contains('is-active') && openAccordion(parent, panel)
+      el.addEventListener('click', () => {
+        parent.classList.contains('is-active')
           ? closeAccordion(parent, panel)
-          : openAccordion(parent, panel);
-      });
-    }
+          : openAccordion(parent, panel)
+      })
+    })
   }
-})();
+})()

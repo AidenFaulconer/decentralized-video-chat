@@ -7,186 +7,180 @@
  * https://github.com/polonel/Snackbar/blob/master/LICENSE
  */
 
-(function (root, factory) {
-  "use strict";
-
-  if (typeof define === "function" && define.amd) {
-    define([], function () {
-      return (root.Snackbar = factory());
-    });
-  } else if (typeof module === "object" && module.exports) {
-    module.exports = root.Snackbar = factory();
+;((root, factory) => {
+  if (typeof define === 'function' && define.amd) {
+    define([], () => {
+      return (root.Snackbar = factory())
+    })
+  } else if (typeof module === 'object' && module.exports) {
+    module.exports = root.Snackbar = factory()
   } else {
-    root.Snackbar = factory();
+    root.Snackbar = factory()
   }
-})(this, function () {
-  var Snackbar = {};
+})(this, () => {
+  const Snackbar = {}
 
-  Snackbar.current = null;
-  var $defaults = {
-    text: "Default Text",
-    textColor: "#FFFFFF",
-    width: "auto",
+  Snackbar.current = null
+  const $defaults = {
+    text: 'Default Text',
+    textColor: '#FFFFFF',
+    width: 'auto',
     showAction: true,
-    actionText: "Dismiss",
-    actionTextAria: "Dismiss, Description for Screen Readers",
+    actionText: 'Dismiss',
+    actionTextAria: 'Dismiss, Description for Screen Readers',
     alertScreenReader: false,
-    actionTextColor: "#4CAF50",
+    actionTextColor: '#4CAF50',
     showSecondButton: false,
-    secondButtonText: "",
-    secondButtonAria: "Description for Screen Readers",
-    secondButtonTextColor: "#4CAF50",
+    secondButtonText: '',
+    secondButtonAria: 'Description for Screen Readers',
+    secondButtonTextColor: '#4CAF50',
     // backgroundColor: "#323232",
-    pos: "bottom-left",
+    pos: 'bottom-left',
     duration: 5000,
-    customClass: "",
-    onActionClick: function (element) {
-      element.style.opacity = 0;
+    customClass: '',
+    onActionClick({ style }) {
+      style.opacity = 0
     },
-    onSecondButtonClick: function (element) {},
-    onClose: function (element) {},
-  };
+    onSecondButtonClick(element) {},
+    onClose(element) {},
+  }
 
-  Snackbar.show = function ($options) {
-    var options = Extend(true, $defaults, $options);
+  Snackbar.show = ($options) => {
+    const options = Extend(true, $defaults, $options)
 
     if (Snackbar.current) {
-      Snackbar.current.style.opacity = 0;
+      Snackbar.current.style.opacity = 0
       setTimeout(
         function () {
-          var $parent = this.parentElement;
+          const $parent = this.parentElement
           if ($parent)
             // possible null if too many/fast Snackbars
-            $parent.removeChild(this);
+            $parent.removeChild(this)
         }.bind(Snackbar.current),
         500
-      );
+      )
     }
 
-    Snackbar.snackbar = document.createElement("div");
-    Snackbar.snackbar.className = "snackbar-container " + options.customClass;
-    Snackbar.snackbar.style.width = options.width;
-    var $p = document.createElement("p");
-    $p.style.margin = 0;
-    $p.style.padding = 0;
-    $p.style.color = options.textColor;
-    $p.style.fontSize = "14px";
-    $p.style.fontWeight = 300;
-    $p.style.lineHeight = "1em";
-    $p.innerHTML = options.text;
-    Snackbar.snackbar.appendChild($p);
+    Snackbar.snackbar = document.createElement('div')
+    Snackbar.snackbar.className = `snackbar-container ${options.customClass}`
+    Snackbar.snackbar.style.width = options.width
+    const $p = document.createElement('p')
+    $p.style.margin = 0
+    $p.style.padding = 0
+    $p.style.color = options.textColor
+    $p.style.fontSize = '14px'
+    $p.style.fontWeight = 300
+    $p.style.lineHeight = '1em'
+    $p.innerHTML = options.text
+    Snackbar.snackbar.appendChild($p)
     // Snackbar.snackbar.style.background = options.backgroundColor;
 
     if (options.showSecondButton) {
-      var secondButton = document.createElement("button");
-      secondButton.className = "action";
-      secondButton.innerHTML = options.secondButtonText;
-      secondButton.setAttribute("aria-label", options.secondButtonAria);
-      secondButton.style.color = options.secondButtonTextColor;
-      secondButton.addEventListener("click", function () {
-        options.onSecondButtonClick(Snackbar.snackbar);
-      });
-      Snackbar.snackbar.appendChild(secondButton);
+      const secondButton = document.createElement('button')
+      secondButton.className = 'action'
+      secondButton.innerHTML = options.secondButtonText
+      secondButton.setAttribute('aria-label', options.secondButtonAria)
+      secondButton.style.color = options.secondButtonTextColor
+      secondButton.addEventListener('click', () => {
+        options.onSecondButtonClick(Snackbar.snackbar)
+      })
+      Snackbar.snackbar.appendChild(secondButton)
     }
 
     if (options.showAction) {
-      var actionButton = document.createElement("button");
-      actionButton.className = "action";
-      actionButton.innerHTML = options.actionText;
-      actionButton.setAttribute("aria-label", options.actionTextAria);
-      actionButton.style.color = options.actionTextColor;
-      actionButton.addEventListener("click", function () {
-        options.onActionClick(Snackbar.snackbar);
-      });
-      Snackbar.snackbar.appendChild(actionButton);
+      const actionButton = document.createElement('button')
+      actionButton.className = 'action'
+      actionButton.innerHTML = options.actionText
+      actionButton.setAttribute('aria-label', options.actionTextAria)
+      actionButton.style.color = options.actionTextColor
+      actionButton.addEventListener('click', () => {
+        options.onActionClick(Snackbar.snackbar)
+      })
+      Snackbar.snackbar.appendChild(actionButton)
     }
 
     if (options.duration) {
       setTimeout(
         function () {
           if (Snackbar.current === this) {
-            Snackbar.current.style.opacity = 0;
+            Snackbar.current.style.opacity = 0
             // When natural remove event occurs let's move the snackbar to its origins
-            Snackbar.current.style.top = "-100px";
-            Snackbar.current.style.bottom = "-100px";
+            Snackbar.current.style.top = '-100px'
+            Snackbar.current.style.bottom = '-100px'
           }
         }.bind(Snackbar.snackbar),
         options.duration
-      );
+      )
     }
 
     if (options.alertScreenReader) {
-      Snackbar.snackbar.setAttribute("role", "alert");
+      Snackbar.snackbar.setAttribute('role', 'alert')
     }
 
     Snackbar.snackbar.addEventListener(
-      "transitionend",
-      function (event, elapsed) {
-        if (event.propertyName === "opacity" && this.style.opacity === "0") {
-          if (typeof options.onClose === "function") options.onClose(this);
+      'transitionend',
+      function ({ propertyName }, elapsed) {
+        if (propertyName === 'opacity' && this.style.opacity === '0') {
+          if (typeof options.onClose === 'function') options.onClose(this)
 
-          this.parentElement.removeChild(this);
+          this.parentElement.removeChild(this)
           if (Snackbar.current === this) {
-            Snackbar.current = null;
+            Snackbar.current = null
           }
         }
       }.bind(Snackbar.snackbar)
-    );
+    )
 
-    Snackbar.current = Snackbar.snackbar;
+    Snackbar.current = Snackbar.snackbar
 
-    document.body.appendChild(Snackbar.snackbar);
-    var $bottom = getComputedStyle(Snackbar.snackbar).bottom;
-    var $top = getComputedStyle(Snackbar.snackbar).top;
-    Snackbar.snackbar.style.opacity = 1;
-    Snackbar.snackbar.className =
-      "snackbar-container " +
-      options.customClass +
-      " snackbar-pos " +
-      options.pos;
-  };
+    document.body.appendChild(Snackbar.snackbar)
+    const $bottom = getComputedStyle(Snackbar.snackbar).bottom
+    const $top = getComputedStyle(Snackbar.snackbar).top
+    Snackbar.snackbar.style.opacity = 1
+    Snackbar.snackbar.className = `snackbar-container ${options.customClass} snackbar-pos ${options.pos}`
+  }
 
-  Snackbar.close = function () {
+  Snackbar.close = () => {
     if (Snackbar.current) {
-      Snackbar.current.style.opacity = 0;
+      Snackbar.current.style.opacity = 0
     }
-  };
+  }
 
   // Pure JS Extend
   // http://gomakethings.com/vanilla-javascript-version-of-jquery-extend/
-  var Extend = function () {
-    var extended = {};
-    var deep = false;
-    var i = 0;
-    var length = arguments.length;
+  var Extend = (...args) => {
+    const extended = {}
+    let deep = false
+    let i = 0
+    const length = args.length
 
-    if (Object.prototype.toString.call(arguments[0]) === "[object Boolean]") {
-      deep = arguments[0];
-      i++;
+    if (Object.prototype.toString.call(args[0]) === '[object Boolean]') {
+      deep = args[0]
+      i++
     }
 
-    var merge = function (obj) {
-      for (var prop in obj) {
+    const merge = (obj) => {
+      for (const prop in obj) {
         if (Object.prototype.hasOwnProperty.call(obj, prop)) {
           if (
             deep &&
-            Object.prototype.toString.call(obj[prop]) === "[object Object]"
+            Object.prototype.toString.call(obj[prop]) === '[object Object]'
           ) {
-            extended[prop] = Extend(true, extended[prop], obj[prop]);
+            extended[prop] = Extend(true, extended[prop], obj[prop])
           } else {
-            extended[prop] = obj[prop];
+            extended[prop] = obj[prop]
           }
         }
       }
-    };
-
-    for (; i < length; i++) {
-      var obj = arguments[i];
-      merge(obj);
     }
 
-    return extended;
-  };
+    for (; i < length; i++) {
+      const obj = args[i]
+      merge(obj)
+    }
 
-  return Snackbar;
-});
+    return extended
+  }
+
+  return Snackbar
+})

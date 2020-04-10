@@ -2,7 +2,7 @@
   box-shadow: 9px 9px 16px #0a0b0c, -9px -9px 16px #222328;
   transition: all 0.5s ease;
   transition-property: top, right, bottom, left, opacity;
-  font-family: "Heebo", sans-serif;
+  font-family: 'Heebo', sans-serif;
   font-size: 14px;
   min-height: 14px;
   position: fixed;
