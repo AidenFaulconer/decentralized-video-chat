@@ -217,19 +217,19 @@
       })
   })(),
   (() => {
-    const e = document.querySelectorAll('[class*=reveal-]')
+    const elements = document.querySelectorAll('[class*=reveal-]')
     let t = window.innerHeight
 
-    function n(e, t) {
+    function n(elements, t) {
       let n = 0
       return (...args) => {
         const i = new Date().getTime()
-        if (!(i - n < e)) return (n = i), t.apply(void 0, args)
+        if (!(i - n < elements)) return (n = i), t.apply(void 0, args)
       }
     }
 
     function i() {
-      for (let s of e) {
+      for (let s of elements) {
         ;(n = l),
           c.getBoundingClientRect().top <= t - n &&
             !s.classList.contains('is-revealed') &&
@@ -243,7 +243,7 @@
       var n
       !(() => {
         if (
-          e.length >
+          elements.length >
           document.querySelectorAll('[class*=reveal-].is-revealed').length
         )
           return
@@ -261,7 +261,7 @@
       ;(t = window.innerHeight), n(30, i())
     }
 
-    e.length > 0 &&
+    elements.length > 0 &&
       document.body.classList.contains('has-animations') &&
       (window.addEventListener('load', i),
       window.addEventListener('scroll', s),
