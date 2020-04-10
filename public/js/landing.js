@@ -217,21 +217,6 @@
       })
   })(),
   (() => {
-    const e = document.getElementById('pricing-toggle')
-
-    function t() {
-      const t = document.getElementsByClassName('pricing-switchable')
-      if (e.checked)
-        for (let e = 0; e < t.length; e++)
-          t[e].innerHTML = t[e].getAttribute('data-pricing-yearly')
-      else
-        for (let e = 0; e < t.length; e++)
-          t[e].innerHTML = t[e].getAttribute('data-pricing-monthly')
-    }
-
-    e && (window.addEventListener('load', t), e.addEventListener('change', t))
-  })(),
-  (() => {
     const e = document.querySelectorAll('[class*=reveal-]')
     let t = window.innerHeight
 
@@ -288,9 +273,7 @@
     const t = (e, n, i, s, a) => {
       const l = n - e
       let c = l / i
-      const o = ((e) => {
-        return e < 0.5 ? 2 * e * e : (4 - 2 * e) * e - 1
-      })((c = Math.min(c, 1)))
+      const o = ((e => e < 0.5 ? 2 * e * e : (4 - 2 * e) * e - 1))((c = Math.min(c, 1)))
       window.scroll(0, a + s * o),
         l < i &&
           window.requestAnimationFrame((n) => {
