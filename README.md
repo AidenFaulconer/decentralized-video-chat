@@ -2,7 +2,6 @@
 
 [![Author](https://img.shields.io/badge/Author-ianramzy-brightgreen.svg)](https://ianramzy.com)
 [![License: AGPL](https://img.shields.io/badge/License-AGPLv3-yellow.svg)](LICENSE)
-[![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://paypal.me/ianramzy)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?)](https://github.com/prettier/prettier)
 
 Decentralized video chat platform powered by WebRTC using Twilio STUN/TURN infrastructure.
