@@ -1,17 +1,13 @@
-# Zipcall - Decentralized Video Chat
+# Decentralized Video Chat
 
 [![Author](https://img.shields.io/badge/Author-ianramzy-brightgreen.svg)](https://ianramzy.com)
-![License: AGPL](https://img.shields.io/badge/License-AGPL-3-yellow.svg)
+[![License: AGPL](https://img.shields.io/badge/License-AGPLv3-yellow.svg)](LICENSE)
 [![Donate](https://img.shields.io/badge/Donate-PayPal-brightgreen.svg)](https://paypal.me/ianramzy)
 [![code style: prettier](https://img.shields.io/badge/code_style-prettier-ff69b4.svg?)](https://github.com/prettier/prettier)
-
-# https://zipcall.io
 
 Decentralized video chat platform powered by WebRTC using Twilio STUN/TURN infrastructure.
 Zipcall provides video quality and latency simply not available with traditional
 technology.
-
-![screenshot](public/images/readmecall.png "Video Calling")
 
 ## Features
 
